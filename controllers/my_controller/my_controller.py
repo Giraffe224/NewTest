@@ -16,8 +16,6 @@ except ImportError:
     MAP_SYSTEM_AVAILABLE = False
     print("警告: 无法导入地图系统模块，地图功能将不可用")
 
-print("我是神人")
-
 # 仿真时间步长（毫秒）
 TIME_STEP = 32
 

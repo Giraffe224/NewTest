@@ -88,9 +88,13 @@ class OccupancyGridMap:
         scale_z = display_height / self.height_pixels  # 更改为z轴
         scale = min(scale_x, scale_z)  # 保持比例
 
+        # 优化：只绘制一部分网格以提高性能
+        # 每skip个像素绘制一次
+        skip = max(1, int(1/scale))  # 根据缩放比例决定跳过多少像素
+        
         # 绘制地图
-        for z in range(self.height_pixels):  # 更改为z轴
-            for x in range(self.width_pixels):
+        for z in range(0, self.height_pixels, skip):  # 更改为z轴
+            for x in range(0, self.width_pixels, skip):
                 cell_value = self.grid[z, x]  # 更改为z轴
                 color = 0x808080  # 默认灰色 (未知)
                 if cell_value == 1:  # 空闲
@@ -101,8 +105,8 @@ class OccupancyGridMap:
                 # 计算在 Display 上的绘制坐标和尺寸
                 disp_x = int(x * scale)
                 disp_z = int(z * scale)  # 更改为z轴
-                disp_w = max(1, int(scale))  # 确保至少绘制一个像素
-                disp_h = max(1, int(scale))
+                disp_w = max(1, int(scale * skip))  # 调整绘制宽度以覆盖跳过的区域
+                disp_h = max(1, int(scale * skip))  # 调整绘制高度以覆盖跳过的区域
 
                 display.setColor(color)
                 display.fillRectangle(disp_x, disp_z, disp_w, disp_h)  # 更改为z轴
