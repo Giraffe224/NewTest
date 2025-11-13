@@ -233,7 +233,7 @@ class RobotController:
             # =============================================
             # 打印GPS坐标信息
             print(f"GPS坐标: x={gps_values[0]:.2f}, y={gps_values[1]:.2f}, z={gps_values[2]:.2f}")
-            time.sleep(1/TIME_STEP)
+            time.sleep(TIME_STEP/1000)
 
     def run(self):
         """运行机器人控制器主循环"""
