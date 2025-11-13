@@ -1,0 +1,262 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation -0.3187245816357044 -0.8309278927184646 -0.45604109262608905 2.102634731762734
+  position -2.3056210396354464 2.5673193088340582 2.6480781429043017
+}
+Robot {
+  translation 0.7617731290688479 -2.0708873936902106 3.585390155006497
+  rotation 0.0012288590650739093 0.9999991049624721 0.0005291310360262736 0.6942945765840361
+  children [
+    InertialUnit {
+      children [
+        Solid {
+          translation -0.06 0.25 0
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 1 0.2 1
+              }
+              geometry Box {
+                size 0.05 0.01 0.15
+              }
+            }
+          ]
+          boundingObject Box {
+            size 0.05 0.01 0.15
+          }
+          physics Physics {
+          }
+        }
+      ]
+      boundingObject Box {
+        size 0.1 0.1 0.1
+      }
+      physics Physics {
+      }
+    }
+    Display {
+      translation -0.01 0.25 0
+      children [
+        Shape {
+          appearance PBRAppearance {
+          }
+          geometry Box {
+            size 0.05 0.01 0.15
+          }
+        }
+      ]
+      boundingObject Box {
+        size 0.05 0.01 0.15
+      }
+      physics Physics {
+      }
+    }
+    GPS {
+      children [
+        Solid {
+          translation 0.04 0.25 0
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0 0 0
+              }
+              geometry Box {
+                size 0.05 0.01 0.15
+              }
+            }
+          ]
+          boundingObject Box {
+            size 0.05 0.01 0.15
+          }
+          physics Physics {
+          }
+        }
+      ]
+      boundingObject Box {
+        size 0.1 0.1 0.1
+      }
+      physics Physics {
+      }
+    }
+    RobotisLds01 {
+      translation 0 0.27 0
+    }
+    DEF ds_right DistanceSensor {
+      translation 0.175 0.1 0.1
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0
+          }
+          geometry Box {
+            size 0.05 0.05 0.05
+          }
+        }
+      ]
+      name "ds_right"
+    }
+    DEF ds_left DistanceSensor {
+      translation 0.175 0.1 -0.1
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 0
+          }
+          geometry Box {
+            size 0.05 0.05 0.05
+          }
+        }
+      ]
+      name "ds_left"
+    }
+    Solid {
+      translation 0.14 -0.25 0
+      children [
+        Shape {
+          appearance PBRAppearance {
+          }
+          geometry Sphere {
+            radius 0.05
+          }
+        }
+      ]
+      name "solid(3)"
+      boundingObject Sphere {
+        radius 0.05
+      }
+      physics Physics {
+      }
+    }
+    Solid {
+      translation -0.14 -0.25 0
+      children [
+        Shape {
+          appearance PBRAppearance {
+          }
+          geometry Sphere {
+            radius 0.05
+          }
+        }
+      ]
+      name "solid(2)"
+      boundingObject Sphere {
+        radius 0.05
+      }
+      physics Physics {
+      }
+    }
+    DEF Car_body Shape {
+      appearance Appearance {
+        material Material {
+        }
+        texture ImageTexture {
+          url [
+            "textures/rock.jpg"
+          ]
+        }
+      }
+      geometry Cylinder {
+        height 0.5
+        radius 0.2
+      }
+    }
+    DEF Left_wheel HingeJoint {
+      jointParameters HingeJointParameters {
+        position 7421.212716657454
+        axis 0 0 -1
+        anchor 0 -0.15 0.250001
+      }
+      device [
+        RotationalMotor {
+          name "left_motor"
+        }
+      ]
+      endPoint Solid {
+        translation -0.0010744416558717761 -0.15044824553561445 0.2536630206117403
+        rotation -0.914482168815285 0.2858740506480846 -0.28635361021811684 1.6338232204110144
+        children [
+          DEF wheel Shape {
+            appearance Appearance {
+              texture ImageTexture {
+                url [
+                  "textures/checkered_parquetry.jpg"
+                ]
+              }
+            }
+            geometry Cylinder {
+              height 0.1
+              radius 0.15
+            }
+          }
+        ]
+        boundingObject DEF wheel Shape {
+          geometry Cylinder {
+            height 0.1
+            radius 0.15
+          }
+        }
+        physics Physics {
+        }
+      }
+    }
+    DEF Right_wheel HingeJoint {
+      jointParameters HingeJointParameters {
+        position -2169.1571336159786
+        axis 0 0 1
+        anchor 0 -0.15 -0.250001
+      }
+      device [
+        RotationalMotor {
+          name "right_motor"
+        }
+      ]
+      endPoint Solid {
+        translation -0.0011874435889841293 -0.15063552328433027 -0.253610409823005
+        rotation 0.5933164154029598 -0.5785780278231188 0.5596633782316767 4.2004820274254895
+        children [
+          DEF wheel Shape {
+            appearance Appearance {
+              texture ImageTexture {
+                url [
+                  "textures/checkered_parquetry.jpg"
+                ]
+              }
+            }
+            geometry Cylinder {
+              height 0.1
+              radius 0.15
+            }
+          }
+        ]
+        name "solid(1)"
+        boundingObject DEF wheel Shape {
+          geometry Cylinder {
+            height 0.1
+            radius 0.15
+          }
+        }
+        physics Physics {
+        }
+      }
+    }
+  ]
+  boundingObject USE Car_body
+  physics Physics {
+    mass 1
+  }
+  controller "<extern>"
+  linearVelocity 0.0005201889231460042 -5.049174121542263e-06 -0.00043400833803013247
+  angularVelocity -1.3969903192031725e-05 -4.891242377705091e-05 -1.2983230402475969e-05
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation 1.82607 -2.35 1.59912
+  floorSize 5 5
+  wallHeight 2
+}
